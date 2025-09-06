@@ -8,6 +8,8 @@ import SwiftUI
 
 struct SystemGlassControls: View {
     @State private var sliderValue = 80.0
+    @State private var isOn = false
+    @State private var selectedOption = 0
 
     var body: some View {
         NavigationStack {
@@ -23,19 +25,55 @@ struct SystemGlassControls: View {
                 )
                 .ignoresSafeArea()
 
-                VStack {
-                    HStack {
-                        Text("Volume")
-                        Spacer()
-                        Text("\(Int(sliderValue))%")
+                ScrollView {
+                    VStack {
+                        HStack {
+                            Text("Volume")
+                            Spacer()
+                            Text("\(Int(sliderValue))%")
+                        }
+                        .accessibilityHidden(true)
+
+                        Slider(value: $sliderValue, in: 1...100)
+                            .accessibilityValue("Valume \(sliderValue)%")
+
+                        Toggle(isOn: $isOn) {
+                            Text("Enabled")
+                        }
+
+                        Picker("Select an option", selection: $selectedOption) {
+                            Text("Option 1").tag(5)
+                            Text("Option 2").tag(1)
+                            Text("Option 3").tag(2)
+                        }
+                        .pickerStyle(.segmented)
                     }
-                    .accessibilityHidden(true)
-                    
-                    Slider(value: $sliderValue, in: 1...100)
-                        .accessibilityValue("Valume \(sliderValue)%")
+                    .padding()
+                    .glassEffect(.clear, in: .rect(cornerRadius: 10))
                 }
             }
             .safeAreaPadding()
+            .navigationTitle("Elements")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        
+                    } label: {
+                        Label("Speaker", systemImage: "plus")
+                    }
+                }
+                
+                ToolbarSpacer(.fixed)
+                
+                ToolbarItem {
+                    Button {
+                        
+                    } label: {
+                        Label("Speaker", systemImage: "minus")
+                    }
+                }
+            }
         }
     }
 }
