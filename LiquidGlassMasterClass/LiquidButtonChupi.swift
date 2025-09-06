@@ -39,20 +39,45 @@ struct LiquidButtonChupi: View {
             .navigationTitle("LiquidGlassFAB")
             .navigationBarTitleDisplayMode(.large)
             .overlay(alignment: .bottomTrailing) {
-                Button {
-                    withAnimation {
-                        expanded.toggle()
+                GlassEffectContainer {
+                    VStack {
+                        if expanded {
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "link")
+                            }
+                            
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "link")
+                            }
+                            
+                            Button {
+                                
+                            } label: {
+                                Image(systemName: "link")
+                            }
+                        }
+                        
+                        Button {
+                            withAnimation {
+                                expanded.toggle()
+                            }
+                        } label: {
+                            Image(systemName: expanded ? "xmark" : "plus")
+                                .font(.title2)
+                                .bold()
+                                .rotationEffect(.degrees(expanded ? 90 : 0))
+                        }
                     }
-                } label: {
-                    Image(systemName: expanded ? "xmark" : "plus")
-                        .font(.title2)
-                        .bold()
-                        .rotationEffect(.degrees(expanded ? 90 : 0))
+                    .buttonBorderShape(.circle)
+                    .glassEffectTransition(.materialize)
+                    .buttonStyle(.glass)
+                    .controlSize(.large)
+                    .padding()
                 }
-                .padding()
-                .buttonStyle(.glass)
-                .buttonBorderShape(.circle)
-                .controlSize(.large)
             }
         }
     }
