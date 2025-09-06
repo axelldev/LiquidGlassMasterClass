@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct LiquidButtonChupi: View {
+    @State private var expanded = false
+
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -38,11 +40,14 @@ struct LiquidButtonChupi: View {
             .navigationBarTitleDisplayMode(.large)
             .overlay(alignment: .bottomTrailing) {
                 Button {
-
+                    withAnimation {
+                        expanded.toggle()
+                    }
                 } label: {
-                    Image(systemName: "plus")
+                    Image(systemName: expanded ? "xmark" : "plus")
                         .font(.title2)
                         .bold()
+                        .rotationEffect(.degrees(expanded ? 90 : 0))
                 }
                 .padding()
                 .buttonStyle(.glass)
