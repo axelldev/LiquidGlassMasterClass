@@ -26,55 +26,100 @@ struct SystemGlassControls: View {
                 .ignoresSafeArea()
 
                 ScrollView {
-                    VStack {
-                        HStack {
-                            Text("Volume")
-                            Spacer()
-                            Text("\(Int(sliderValue))%")
-                        }
-                        .accessibilityHidden(true)
-
-                        Slider(value: $sliderValue, in: 1...100)
-                            .accessibilityValue("Valume \(sliderValue)%")
-
-                        Toggle(isOn: $isOn) {
-                            Text("Enabled")
-                        }
-
-                        Picker("Select an option", selection: $selectedOption) {
-                            Text("Option 1").tag(5)
-                            Text("Option 2").tag(1)
-                            Text("Option 3").tag(2)
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                    .padding()
-                    .glassEffect(.clear, in: .rect(cornerRadius: 10))
+                    scroll
+                    scroll
+                    scroll
+                    scroll
                 }
+
             }
             .safeAreaPadding()
             .navigationTitle("Elements")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup {
                     Button {
-                        
+
                     } label: {
                         Label("Speaker", systemImage: "plus")
                     }
+
+                    Button {
+
+                    } label: {
+                        Label("Speaker", systemImage: "minus")
+                    }
                 }
-                
-                ToolbarSpacer(.fixed)
-                
-                ToolbarItem {
+
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+
+                    } label: {
+                        Label("Speaker", systemImage: "speaker")
+                    }
+                }
+
+                ToolbarSpacer(.fixed, placement: .topBarLeading)
+
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+
+                    } label: {
+                        Label("Speaker", systemImage: "speaker.slash")
+                    }
+                }
+
+                ToolbarItem(placement: .bottomBar) {
                     Button {
                         
+                    } label: {
+                        Label("Speaker", systemImage: "speaker.slash")
+                    }
+                }
+                
+                ToolbarSpacer(placement: .bottomBar)
+                
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button {
+
+                    } label: {
+                        Label("Speaker", systemImage: "plus")
+                    }
+                    Button {
+
                     } label: {
                         Label("Speaker", systemImage: "minus")
                     }
                 }
             }
         }
+    }
+
+    var scroll: some View {
+        VStack {
+            HStack {
+                Text("Volume")
+                Spacer()
+                Text("\(Int(sliderValue))%")
+            }
+            .accessibilityHidden(true)
+
+            Slider(value: $sliderValue, in: 1...100)
+                .accessibilityValue("Valume \(sliderValue)%")
+
+            Toggle(isOn: $isOn) {
+                Text("Enabled")
+            }
+
+            Picker("Select an option", selection: $selectedOption) {
+                Text("Option 1").tag(5)
+                Text("Option 2").tag(1)
+                Text("Option 3").tag(2)
+            }
+            .pickerStyle(.segmented)
+        }
+        .padding()
+        .glassEffect(.clear, in: .rect(cornerRadius: 10))
     }
 }
 
