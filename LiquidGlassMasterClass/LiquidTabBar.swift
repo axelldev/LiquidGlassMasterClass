@@ -38,6 +38,27 @@ struct LiquidTabBar: View {
         }
         .searchable(text: $search)
         .tabBarMinimizeBehavior(.onScrollDown)
+        .tabViewBottomAccessory {
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("LiquidGlass MasterClass")
+                        .font(.caption)
+
+                    Text("LiquidGlass MasterClass")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+
+                Button {
+
+                } label: {
+                    Image(systemName: "play.fill")
+                }
+            }
+            .padding(.horizontal)
+        }
     }
 }
 
